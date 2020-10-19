@@ -66,13 +66,13 @@ app.get('/webhook', (req, res) => {
     }
   });
 
-  app.get('/webhook', (req, res, next) => {
+  app.get('/webhook', (req, res) => {
 
 //   function ignoreFavicon(req, res, next) {
     if (req.originalUrl.includes('favicon.ico')) {
       res.status(204).end()
     // }
-    next();
+    // next();
   }
 
 //   app.use(ignoreFavicon);
