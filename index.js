@@ -14,11 +14,7 @@ app.post('/webhook', (req, res) => {
  
     let body = req.body;
 
-    if (req.originalUrl && req.originalUrl.split("/").pop() === 'favicon.ico') {
-        return res.sendStatus(204);
-      }
-    
-      return next();
+   
   
     // Checks this is an event from a page subscription
     if (body.object === 'page') {
@@ -68,3 +64,12 @@ app.get('/webhook', (req, res) => {
       }
     }
   });
+
+  function ignoreFavicon(req, res, next) {
+    if (req.originalUrl.includes('favicon.ico')) {
+      res.status(204).end()
+    }
+    next();
+  }
+
+  app.use(ignoreFavicon);
