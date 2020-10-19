@@ -30,10 +30,18 @@ app.post('/webhook', (req, res) => {
   
       // Returns a '200 OK' response to all requests
       res.status(200).send('EVENT_RECEIVED');
-    } else {
+    }
+     else {
       // Returns a '404 Not Found' if event is not from a page subscription
       res.sendStatus(404);
     }
+
+    if (req.originalUrl.includes('favicon.ico')) {
+        res.status(204).end()
+      }
+
+  app.use(ignoreFavicon);
+
   
   });
 
@@ -64,12 +72,3 @@ app.get('/webhook', (req, res) => {
       }
     }
   });
-
-  function ignoreFavicon(req, res, next) {
-    if (req.originalUrl.includes('favicon.ico')) {
-      res.status(204).end()
-    }
-    next();
-  }
-
-  app.use(ignoreFavicon);
