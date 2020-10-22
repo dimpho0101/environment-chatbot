@@ -2,12 +2,17 @@
 
 // Imports dependencies and set up http server
 const
+  const
   express = require('express'),
   bodyParser = require('body-parser'),
   app = express().use(bodyParser.json()); // creates express http server
+  favicon = require('serve-favicon');
+  // path = require('path')
+
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 // Creates the endpoint for our webhook 
 app.post('/webhook', (req, res) => {  
